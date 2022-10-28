@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <fileVersion>2</fileVersion>
+    <fileChecksum>438540712</fileChecksum>
+    <configuration>
+        <name>Debug</name>
+        <outputs>
+            <file>$TOOLKIT_DIR$\lib\dlib\dl430ff.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\uart.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\key.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\uart.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\oled.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.r43</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Product.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Defaults.h</file>
+            <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\ysizet.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\ycheck.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Threads.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\key.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Exe\res_detect.ulp</file>
+            <file>$TOOLKIT_DIR$\config\linker\lnk430f149.xcl</file>
+            <file>$PROJ_DIR$\Debug\Obj\oled.__cstat.et</file>
+            <file>$TOOLKIT_DIR$\config\linker\multiplier.xcl</file>
+            <file>$PROJ_DIR$\Debug\Obj\data_proc.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\oled.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\res_detect.pbd</file>
+            <file>$PROJ_DIR$\Debug\Obj\data_proc.__cstat.et</file>
+            <file>$TOOLKIT_DIR$\inc\in430.h</file>
+            <file>$PROJ_DIR$\Debug\Exe\res_detect.d43</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+            <file>$TOOLKIT_DIR$\lib\dlib\dl430ff.r43</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\stdlib.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\xencoding_limits.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\yvals.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\key.pbi</file>
+            <file>$PROJ_DIR$\source\data_proc.c</file>
+            <file>$PROJ_DIR$\source\oledfont.h</file>
+            <file>$PROJ_DIR$\source\uart.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\data_proc.r43</file>
+            <file>$PROJ_DIR$\source\data_proc.h</file>
+            <file>$PROJ_DIR$\source\uart.c</file>
+            <file>$PROJ_DIR$\source\oled.h</file>
+            <file>$PROJ_DIR$\source\key.c</file>
+            <file>$PROJ_DIR$\source\key.h</file>
+            <file>$PROJ_DIR$\main.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\uart.r43</file>
+            <file>$PROJ_DIR$\source\oled.c</file>
+            <file>$TOOLKIT_DIR$\inc\msp430x14x.h</file>
+        </outputs>
+        <file>
+            <name>$PROJ_DIR$\Debug\Exe\res_detect.d43</name>
+            <inputs>
+                <tool>
+                    <name>XLINK</name>
+                    <file> 14 16 33 2 5 4 40 25</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\source\data_proc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 33</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 17</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 21</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 42 22 8 34 32</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 32 22 34 42 8</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\source\uart.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 40</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 3</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 1</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 32 42 22 8 34</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 34 22 8 42 32</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\source\key.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 2</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 29</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 12</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 38 42 22 8</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 8 22 42 38</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\main.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 5</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 24</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 19</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 42 22 8 38 32 34 36</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 42 36 32 22 38 34 8</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\source\oled.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 4</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 18</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 15</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 36 42 22 8 26 10 28 7 0 6 27 11 9 31</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 10 9 31 22 26 42 27 11 36 8 28 7 0 6</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>ULP430</name>
+                    <file> 13</file>
+                </tool>
+                <tool>
+                    <name>XLINK</name>
+                    <file> 23</file>
+                </tool>
+            </outputs>
+        </file>
+    </configuration>
+    <configuration>
+        <name>Release</name>
+        <outputs>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Product.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Defaults.h</file>
+            <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\ysizet.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\ycheck.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Threads.h</file>
+            <file>$PROJ_DIR$\Release\Exe\res_detect.txt</file>
+            <file>$PROJ_DIR$\Release\Obj\oled.r43</file>
+            <file>$TOOLKIT_DIR$\inc\in430.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\stdlib.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\xencoding_limits.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\yvals.h</file>
+            <file>$PROJ_DIR$\source\data_proc.c</file>
+            <file>$PROJ_DIR$\source\oledfont.h</file>
+            <file>$PROJ_DIR$\source\uart.h</file>
+            <file>$PROJ_DIR$\source\data_proc.h</file>
+            <file>$PROJ_DIR$\source\uart.c</file>
+            <file>$PROJ_DIR$\source\oled.h</file>
+            <file>$PROJ_DIR$\source\key.c</file>
+            <file>$PROJ_DIR$\source\key.h</file>
+            <file>$PROJ_DIR$\main.c</file>
+            <file>$PROJ_DIR$\source\oled.c</file>
+            <file>$TOOLKIT_DIR$\inc\msp430x14x.h</file>
+            <file>$PROJ_DIR$\Release\Obj\data_proc.pbi</file>
+            <file>$PROJ_DIR$\Release\Obj\res_detect.pbd</file>
+            <file>$TOOLKIT_DIR$\lib\dlib\dl430xsfn.r43</file>
+            <file>$PROJ_DIR$\Release\Obj\uart.pbi</file>
+            <file>$PROJ_DIR$\Release\Obj\key.r43</file>
+            <file>$PROJ_DIR$\Release\Obj\main.pbi</file>
+            <file>$TOOLKIT_DIR$\config\lnkCC430F5133.xcl</file>
+            <file>$PROJ_DIR$\Release\Obj\data_proc.r43</file>
+            <file>$TOOLKIT_DIR$\lib\dlib\dl430xsfn.h</file>
+            <file>$PROJ_DIR$\Release\Obj\uart.r43</file>
+            <file>$TOOLKIT_DIR$\config\multiplier32_loc2.xcl</file>
+            <file>$PROJ_DIR$\Release\Obj\key.pbi</file>
+            <file>$PROJ_DIR$\Release\Obj\oled.pbi</file>
+            <file>$PROJ_DIR$\Release\Obj\main.r43</file>
+        </outputs>
+        <file>
+            <name>$PROJ_DIR$\Release\Exe\res_detect.txt</name>
+            <inputs>
+                <tool>
+                    <name>XLINK</name>
+                    <file> 29 33 30 27 36 7 32 25</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\source\data_proc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 30</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 23</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 22 8 2 15 14</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 15 14</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\source\uart.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 32</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 26</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 14 22 8 2 15</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 14 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\source\key.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 27</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 34</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 19 22 8 2</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 19</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\main.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 36</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 28</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 22 8 2 19 14 15 17</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\source\oled.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 7</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 35</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 17 22 8 2 9 4 11 1 31 0 10 5 3 13</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 17 13</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>XLINK</name>
+                    <file> 6</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Release\Obj\res_detect.pbd</name>
+            <inputs>
+                <tool>
+                    <name>BILINK</name>
+                    <file> 23 34 28 35 26</file>
+                </tool>
+            </inputs>
+        </file>
+        <forcedrebuild>
+            <name>[MULTI_TOOL]</name>
+            <tool>XLINK</tool>
+        </forcedrebuild>
+    </configuration>
+</project>
