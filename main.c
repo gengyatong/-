@@ -64,21 +64,24 @@ void strcopy( unsigned char end[]  ,unsigned char source[]  , unsigned char leng
 void main(void)
 {
 
-  unsigned char  thresh_2 = 10 ;
-  unsigned char  thresh_1 = 20;
+  unsigned char  thresh_2 = 20 ;
+  unsigned char  thresh_1 = 10;
  
   int key_value = 0 ;       //检测当前按键值
   int key_value_reg = 0 ;   //锁存上一次按键值
   int key_effect = 0 ;      //获得边沿检测后的有效值
-  char waring_sw = 0xFF ;   //报警功能开关
+  char waring_sw = 0x00 ;   //报警功能开关
   
   unsigned char data_display_reg[12] = { '1','0','0','0','K',' ',' ',' ',' ',' ',' ',' ' };
   
   float res_save = 1000 ;     //默认初始电阻值为1M
   float  res_now = 1000 ;     //记录当前电阻值
   
-  float thresh_2_value = 0;
-  float thresh_1_value = 0;;
+  float thresh_2_value_H = 0;
+  float thresh_2_value_L = 0;
+  
+  float thresh_1_value_H = 0;
+  float thresh_1_value_L = 0;
   
   unsigned char packHeader[2] = {0x55,0xAA};
   unsigned char packEnder[2] = {0xAA,0X55};
@@ -258,10 +261,13 @@ void main(void)
 
 //延迟，并且根据阈值大小点亮LED或者鸣叫蜂鸣器
    
-    thresh_2_value = (float)thresh_2/100*res_save;
-    thresh_1_value = (float)thresh_1/100*res_save;   
+    thresh_2_value_H = (float)(100+thresh_2)/100*res_save;
+    thresh_2_value_L = (float)(100-thresh_2)/100*res_save;
     
-    if (( thresh_1_value > res_now)&&(waring_sw == 0xFF))      {  
+    thresh_1_value_H = (float)(100+thresh_1)/100*res_save; 
+    thresh_1_value_L = (float)(100-thresh_1)/100*res_save; 
+    
+    if (( (thresh_1_value_L > res_now)||(thresh_1_value_H < res_now)  )&&(waring_sw == 0xFF))      {  
        P5OUT |= 0x10;   //点亮LED灯
        DeviceState = DeviceState |0x02;
     } else {
@@ -269,7 +275,7 @@ void main(void)
        DeviceState = DeviceState &0xfD;
     }
     
-    if ( (thresh_2_value > res_now)&&(waring_sw == 0xFF))      {
+   if (( (thresh_2_value_L > res_now)||(thresh_2_value_H < res_now)  )&&(waring_sw == 0xFF))      {  
        for(int i= 0; i<150; i++ ) {
         delay_us(150);
         P5OUT = P5OUT | 0x08;   
