@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <settings>
     <DebugChecksum>
-        <Checksum>183673262</Checksum>
+        <Checksum>453535738</Checksum>
     </DebugChecksum>
     <State_Storage>
         <Control_Register>-1</Control_Register>
@@ -60,6 +60,15 @@
     <Disassembly>
         <MixedMode>1</MixedMode>
     </Disassembly>
+    <LogFile>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+        <Category>_ 0</Category>
+    </LogFile>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
     <Breakpoints>
         <Count>0</Count>
     </Breakpoints>
@@ -83,15 +92,6 @@
         <all_registers>0</all_registers>
         <File_name />
     </Memory_Dump>
-    <LogFile>
-        <LoggingEnabled>_ 0</LoggingEnabled>
-        <LogFile>_ ""</LogFile>
-        <Category>_ 0</Category>
-    </LogFile>
-    <TermIOLog>
-        <LoggingEnabled>_ 0</LoggingEnabled>
-        <LogFile>_ ""</LogFile>
-    </TermIOLog>
     <Aliases>
         <A0>_ "C:\Users\Administrator\Desktop\res_detect_V3\source\data_proc.c" ""</A0>
         <Count>1</Count>

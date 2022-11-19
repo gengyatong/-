@@ -70,7 +70,7 @@ void main(void)
   int key_value = 0 ;       //检测当前按键值
   int key_value_reg = 0 ;   //锁存上一次按键值
   int key_effect = 0 ;      //获得边沿检测后的有效值
-  char waring_sw = 0x00 ;   //报警功能开关
+  char waring_sw = 0xFF ;   //报警功能开关
   
   unsigned char data_display_reg[13] = { '1','0','0','0','K',' ',' ',' ',' ',' ',' ',' ','\0' };
   
@@ -267,7 +267,7 @@ void main(void)
     thresh_1_value_H = (float)(100+thresh_1)/100*res_save; 
     thresh_1_value_L = (float)(100-thresh_1)/100*res_save; 
     
-    if (( (thresh_1_value_L > res_now)||(thresh_1_value_H < res_now)  )&&(waring_sw == 0xFF))      {  
+    if (( (thresh_1_value_L > res_now)||(thresh_1_value_H < res_now)  )&&(waring_sw == 0xFF) &&(res_now != 50000) )      {  
        P5OUT |= 0x10;   //点亮LED灯
        DeviceState = DeviceState |0x02;
     } else {
@@ -275,7 +275,7 @@ void main(void)
        DeviceState = DeviceState &0xfD;
     }
     
-   if (( (thresh_2_value_L > res_now)||(thresh_2_value_H < res_now)  )&&(waring_sw == 0xFF))      {  
+   if (( (thresh_2_value_L > res_now)||(thresh_2_value_H < res_now)  )&&(waring_sw == 0xFF)&&(res_now != 50000))      {  
        for(int i= 0; i<150; i++ ) {
         delay_us(150);
         P5OUT = P5OUT | 0x08;   
