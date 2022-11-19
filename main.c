@@ -72,7 +72,7 @@ void main(void)
   int key_effect = 0 ;      //获得边沿检测后的有效值
   char waring_sw = 0x00 ;   //报警功能开关
   
-  unsigned char data_display_reg[12] = { '1','0','0','0','K',' ',' ',' ',' ',' ',' ',' ' };
+  unsigned char data_display_reg[13] = { '1','0','0','0','K',' ',' ',' ',' ',' ',' ',' ','\0' };
   
   float res_save = 1000 ;     //默认初始电阻值为1M
   float  res_now = 1000 ;     //记录当前电阻值
