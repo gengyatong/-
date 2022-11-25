@@ -806,7 +806,7 @@
                     <item>waring_sw</item>
                     <item>DeviceState</item>
                     <item>dataToSend</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

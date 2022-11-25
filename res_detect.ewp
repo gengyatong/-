@@ -460,7 +460,7 @@
                 </option>
                 <option>
                     <name>IccLang</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IccCDialect</name>
@@ -2302,6 +2302,12 @@
     </file>
     <file>
         <name>$PROJ_DIR$\source\data_proc.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\source\GPIO.cpp</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\source\GPIO.h</name>
     </file>
     <file>
         <name>$PROJ_DIR$\source\key.c</name>
