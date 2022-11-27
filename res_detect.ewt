@@ -2189,4 +2189,10 @@
     <file>
         <name>$PROJ_DIR$\source\uart.h</name>
     </file>
+    <file>
+        <name>$PROJ_DIR$\source\warner.cpp</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\source\warner.h</name>
+    </file>
 </project>

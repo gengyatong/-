@@ -32,28 +32,28 @@ namespace Msp430GPIO
   
   typedef enum
   {
-    //¶ÔÓ¦bitÎª0£¬Ôò¸ÃioÎªÊäÈë·½Ïò
+    //ioè¾“å…¥å¯¹åº”bitä¸º0
     ioInput  = 0x00,
-    //¶ÔÓ¦bitÎª1£¬Ôò¸ÃioÎªÊä³ö·½Ïò
+    //ioè¾“å‡ºå¯¹åº”bitä¸º1
     ioOutput = 0x01
   }DirectDef;
   
   typedef enum
   {
-    //¶ÔÓ¦bitÎª0£¬Ôò¸ÃIOÎªÆÕÍ¨IOÓÃÍ¾£»
+    //ioåŠŸèƒ½ä¸º0
     iofunc  = 0x00,
-    //¶ÔÓ¦bitÎª1£¬Ôò¸ÃIOÎªÍâÉèÓÃÍ¾(peripheral device )
+    //å¤–è®¾åŠŸèƒ½ä¸º1Í¾(peripheral device )
     pdfunc = 0x01
   }FuncSelDef;
     
     
-  //Ã¿ÓÃµ½1¸öpin,¶¼ÉùÃ÷Ò»¸öÕë¶ÔÕâ¸öPINµÄ½á¹¹Ìå
+  //å®šä¹‰å¼•è„šé…ç½®ç›¸å…³ç»“æ„ä½“
   typedef struct gpioConfig
   {
-    PortNumDef  PortNum;     //port ·Ö×é±àºÅ
-    PinNumDef   PinNum;      //pin   ±àºÅ
-    FuncSelDef  FuncSel;     //¹¦ÄÜÑ¡Ôñ
-    DirectDef   Direction;   //ÊäÈë/Êä³ö·½ÏòÉèÖÃ
+    PortNumDef  PortNum;     //port åºå·
+    PinNumDef   PinNum;      //pin  åºå·
+    FuncSelDef  FuncSel;     //åŠŸèƒ½é€‰æ‹©
+    DirectDef   Direction;   //æ–¹å‘é€‰æ‹©
   }GpioConfig;
   
 class Gpio
@@ -62,18 +62,18 @@ class Gpio
         
       void operator=(unsigned char value); 
         
-        //¹¹Ôìº¯Êı£¬Éè¶¨Ê¹ÓÃµÄIO¿ÚÊıÁ¿£¬¸Ã·½·¨½«»áÊ¹GpioGroupÖ¸ÕëÖ¸Ïò·ÖÅäµÄÊı×é
+        //æ„é€ å‡½æ•°
       Gpio( GpioConfig *Gpio);
         
-        //Îö¹¹º¯Êı£¬ÓÃÓÚÊÍ·ÅGpioÉèÖÃIO¶Ë¿ÚÊ±ËùÕ¼ÓÃ·ÖÅäµÄÄÚ´æ
+        //ææ„å‡½æ•°
        ~Gpio();
         
   private:
-        //±£´æ¸ÃIO¿Ú¶ÔÓ¦µÄ»ù´¡ÉèÖÃÏî
+        //ä¿å­˜å¯¹åº”ioè®¾ç½®
       GpioConfig GpioConfig_;
         
   protected:
-        //ÔİÎ´ÓÃµ½
+        //æš‚æœªä½¿ç”¨
        unsigned char PinNumNeed_; 
   };
    

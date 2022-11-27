@@ -4,11 +4,11 @@
 #include "data_proc.h"
 #include "oled.h"
 #include "GPIO.h"
-
+#include "warner.h"
 extern unsigned char Data_Ready ;
 extern unsigned char Data_Ready_0 ;
 extern unsigned char CloudCmd ;
-
+  
 void clk_init()
 {
 
@@ -63,18 +63,28 @@ void strcopy( unsigned char end[]  ,unsigned char source[]  , unsigned char leng
 
 using namespace Msp430GPIO;
 
-void main(void)
+void LedFlash()
 {
-  
-  GpioConfig LedGpioSet= { Port5,Pin4,iofunc,ioOutput};
-  Gpio Led(&LedGpioSet);
-  Led = 1;
-  GpioConfig BeeperGpioSet= { Port5,Pin3,iofunc,ioOutput};
-  Gpio Beeper(&BeeperGpioSet);
-  
+       for(int i= 0; i<10; i++ ) {
+        delay_ms(150);
+        P5OUT = P5OUT | 0x10;   
+        delay_ms(150);
+        P5OUT = P5OUT & 0xEF ;} 
+       return;
+}
+
+
+
+
+void main(void)
+{ 
+  close_watch_dog();
+  clk_init();
+  Warner warnner;
+  warnner.SetCallBackFunc( LedFlash);
   while(1)
   {
-
+    warnner.Warning();
   }
   
 }

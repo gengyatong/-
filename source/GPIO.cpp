@@ -2,16 +2,16 @@
 namespace Msp430GPIO
 {
   
-  //构造函数，设置该PIN的方向，是否复用，
+ //鍗曚釜gpio瀵硅薄
   Gpio::Gpio ( GpioConfig *Gpio )
   {
-    //保存该IO口对应的基础设置项
+    //淇濆瓨port璁剧疆
     GpioConfig_ = *Gpio;
     
-    //用于暂存对应PortNum所需要对应的输入输出方向寄存器 
+    //璁板綍port鏂瑰悜璁剧疆瀵勫瓨鍣ㄥ湴鍧�
     unsigned int *PxDIR;
   
-    //用于暂存对应PortNum所需要对应的功能选择寄存器（普通IO还是用于外设的io）
+    //璁板綍port鍔熻兘璁剧疆瀵勫瓨鍣ㄥ湴鍧�
     unsigned int *PxSEL;
 
     switch((Gpio)->PortNum)
@@ -29,17 +29,17 @@ namespace Msp430GPIO
         case Port6:
         {PxDIR = (unsigned int *)P6DIR_;PxSEL = (unsigned int *)P6SEL_;break;}
       }
-      //如果对应pin为通用IO接口，则将PxSEL中的对应bit清零
+      //濡傛灉io鍔熻兘涓篿o锛屽垯瀵瑰簲瀵勫瓨鍣╞it浣嶄负0
       if(Gpio->FuncSel == iofunc)
         *(unsigned char*)PxSEL = *(unsigned char*)PxSEL &(~(0x01 << Gpio->PinNum));
-      //否则，则将对应bit置为1
+      ////濡傛灉io鍔熻兘涓哄璁撅紝鍒欏搴斿瘎瀛樺櫒bit浣嶄负1
       else
         *(unsigned char*)PxSEL = *(unsigned char*)PxSEL |( (0x01 << Gpio->PinNum));
    
-      //如果对应pin为输入，则将PxDIR中的对应bit清零
+      //濡傛灉io鏂瑰悜涓鸿緭鍏ワ紝鍒欏搴斿瘎瀛樺櫒bit浣嶄负0
       if(Gpio->Direction == ioInput)
         *(unsigned char*)PxDIR = *(unsigned char*)PxDIR &(~(0x01 << Gpio->PinNum));
-      //否则，则将对应bit置为1
+      //濡傛灉io鏂瑰悜涓鸿緭鍑猴紝鍒欏搴斿瘎瀛樺櫒bit浣嶄负0
       else     
         *(unsigned char*)PxDIR = *(unsigned char*)PxDIR|( (0x01 << Gpio->PinNum));     
   }  
