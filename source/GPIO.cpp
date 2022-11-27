@@ -1,56 +1,86 @@
 #include "GPIO.h"
 namespace Msp430GPIO
 {
-    //设置对应的GPIO功能
-  void Gpio:: SetGpio(GpioConfig *Gpio  )
+  
+  //构造函数，设置该PIN的方向，是否复用，
+  Gpio::Gpio ( GpioConfig *Gpio )
   {
-    //用于选择对应PortNum所需要对应的输入输出方向寄存器
-    unsigned int PxDIR;
-    //用于选择对应PortNum所需要对应的功能选择寄存器
-    unsigned int PxSEL;
-   
-    for(int i= 0 ;i<PinNumNeed;i++)
-    {
-      switch((Gpio+i)->PortNum)
+    //保存该IO口对应的基础设置项
+    GpioConfig_ = *Gpio;
+    
+    //用于暂存对应PortNum所需要对应的输入输出方向寄存器 
+    unsigned int *PxDIR;
+  
+    //用于暂存对应PortNum所需要对应的功能选择寄存器（普通IO还是用于外设的io）
+    unsigned int *PxSEL;
+
+    switch((Gpio)->PortNum)
       {
         case Port1:
-        {PxDIR = P1DIR;PxSEL = P1SEL;}
+        {PxDIR = (unsigned int *)P1DIR_;PxSEL = (unsigned int *)P1SEL_;break;}
         case Port2:
-        {PxDIR = P2DIR;PxSEL = P2SEL;}
+        {PxDIR = (unsigned int *)P2DIR_;PxSEL = (unsigned int *)P2SEL_;break;}
         case Port3:
-        {PxDIR = P3DIR;PxSEL = P3SEL;}        
+        {PxDIR = (unsigned int *)P3DIR_;PxSEL = (unsigned int *)P3SEL_;break;}        
         case Port4:
-        {PxDIR = P4DIR;PxSEL = P4SEL;}    
+        {PxDIR = (unsigned int *)P4DIR_;PxSEL = (unsigned int *)P4SEL_;break;}    
         case Port5:
-        {PxDIR = P5DIR;PxSEL = P5SEL;}
+        {PxDIR = (unsigned int *)P5DIR_;PxSEL = (unsigned int *)P5SEL_;break;}
         case Port6:
-        {PxDIR = P6DIR;PxSEL = P6SEL;}
+        {PxDIR = (unsigned int *)P6DIR_;PxSEL = (unsigned int *)P6SEL_;break;}
       }
       //如果对应pin为通用IO接口，则将PxSEL中的对应bit清零
-      if((Gpio+i)->FuncSel == iofunc)
-        PxSEL = PxSEL &(~(0x01 << (Gpio+i)->PinNum));
+      if(Gpio->FuncSel == iofunc)
+        *(unsigned char*)PxSEL = *(unsigned char*)PxSEL &(~(0x01 << Gpio->PinNum));
       //否则，则将对应bit置为1
       else
-        PxSEL = PxSEL |( (0x01 << (Gpio+i)->PinNum));
-        
+        *(unsigned char*)PxSEL = *(unsigned char*)PxSEL |( (0x01 << Gpio->PinNum));
+   
       //如果对应pin为输入，则将PxDIR中的对应bit清零
-      if((Gpio+i)->Direction == ioInput)
-        PxDIR = PxDIR &(~(0x01 << (Gpio+i)->PinNum));
+      if(Gpio->Direction == ioInput)
+        *(unsigned char*)PxDIR = *(unsigned char*)PxDIR &(~(0x01 << Gpio->PinNum));
       //否则，则将对应bit置为1
-      else
-        PxDIR = PxDIR |( (0x01 << (Gpio+i)->PinNum));       
-    }
-  }
+      else     
+        *(unsigned char*)PxDIR = *(unsigned char*)PxDIR|( (0x01 << Gpio->PinNum));     
+  }  
   
-  Gpio::Gpio ( unsigned char pinNumNeed)
+  void Gpio::operator=(unsigned char value)
   {
-    Gpio::PinNumNeed = pinNumNeed;
-    GpioGroup = new GpioConfig[PinNumNeed] ;   
-  }
+    unsigned int * PxOUT ;
+    switch(GpioConfig_.PortNum)
+      {
+        case Port1:
+                PxOUT = (unsigned int *)P1OUT_; 
+                break;
+        case Port2:
+                PxOUT = (unsigned int *)P2OUT_;
+                break;
+        case Port3:
+                PxOUT = (unsigned int *)P3OUT_;
+                break;
+        case Port4:
+                PxOUT = (unsigned int *)P4OUT_;
+                break;
+        case Port5:
+                PxOUT = (unsigned int *)P5OUT_;
+                break;
+      case Port6:
+                PxOUT = (unsigned int *)P6OUT_;
+                break;
+      }  
+      if(value == 0)
+      {
+        *(unsigned char*)PxOUT = *(unsigned char*)PxOUT &  ( ~( 0x01 << GpioConfig_.PinNum ) );
+      }
+      if(value == 1)
+      {
+        *(unsigned char*)PxOUT = *(unsigned char*)PxOUT |  ( ( 0x01 << GpioConfig_.PinNum ) ) ;      
+      }
+  } 
   
   Gpio::~Gpio()
   {
-    delete [] GpioGroup ;    
+  //  delete [] GpioGroup_ ;    
   }
   
   

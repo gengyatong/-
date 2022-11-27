@@ -65,9 +65,16 @@ using namespace Msp430GPIO;
 
 void main(void)
 {
+  
+  GpioConfig LedGpioSet= { Port5,Pin4,iofunc,ioOutput};
+  Gpio Led(&LedGpioSet);
+  Led = 1;
+  GpioConfig BeeperGpioSet= { Port5,Pin3,iofunc,ioOutput};
+  Gpio Beeper(&BeeperGpioSet);
+  
+  while(1)
+  {
 
-  Gpio * LedGpio = new Gpio(1);
-  delete LedGpio;
- 
+  }
+  
 }
-
