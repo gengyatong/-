@@ -1,10 +1,11 @@
+extern "C" {
 #include "msp430x14x.h"
+}
 #include "key.h"
 #include "uart.h"
-#include "data_proc.h"
-#include "oled.h"
 #include "GPIO.h"
 #include "warner.h"
+
 extern unsigned char Data_Ready ;
 extern unsigned char Data_Ready_0 ;
 extern unsigned char CloudCmd ;
@@ -13,8 +14,8 @@ void clk_init()
 {
 
   char i;
-  BCSCTL1 &= ~XT2OFF;           //Ê¹ÓÃÍâ²¿8M¾§Õñ
-  BCSCTL2 |= (SELM_2 + SELS + DIVM_0 + DIVS_3 ) ; //Ö÷Ê±ÖÓÎªÍâ²¿8M¾§Õñ mclk Óë smclk ¾ùÉèÖÃÎª1M
+  BCSCTL1 &= ~XT2OFF;           //Ê¹ï¿½ï¿½ï¿½â²¿8Mï¿½ï¿½ï¿½ï¿½
+  BCSCTL2 |= (SELM_2 + SELS + DIVM_0 + DIVS_3 ) ; //ï¿½ï¿½Ê±ï¿½ï¿½Îªï¿½â²¿8Mï¿½ï¿½ï¿½ï¿½ mclk ï¿½ï¿½ smclk ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª1M
   do 
   {
     IFG1 &= ~OFIFG;
@@ -25,22 +26,22 @@ void clk_init()
 
 void led_init()
 {
-  //·äÃùÆ÷¼°LEDµÆIO¿Ú¿ØÖÆ
+  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½LEDï¿½ï¿½IOï¿½Ú¿ï¿½ï¿½ï¿½
   P5DIR = 0XFF;
   P5OUT = 0x00;
   
-  //fs9721¶ÔÓ¦¹Ü½Å¿ØÖÆ
+  //fs9721ï¿½ï¿½Ó¦ï¿½Ü½Å¿ï¿½ï¿½ï¿½
   P2DIR = 0XFF;
-  P2OUT = 0X03;     //À­¸ßTYPE_COM ¹Ü½Å£¬Ê¹9721ÇÐ»»µ½ÆäËû²âÁ¿Ä£Ê½
+  P2OUT = 0X03;     //ï¿½ï¿½ï¿½ï¿½TYPE_COM ï¿½Ü½Å£ï¿½Ê¹9721ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
   delay_ms(100);
-  P2OUT = 0X01;     //À­µÍTYPE_COM ¹Ü½Å£¬Ê¹9721ÖØÐÂ»Øµ½µç×è²âÁ¿Ä£Ê½
+  P2OUT = 0X01;     //ï¿½ï¿½ï¿½ï¿½TYPE_COM ï¿½Ü½Å£ï¿½Ê¹9721ï¿½ï¿½ï¿½Â»Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
 }
 
 void analogSWinit()
 {
-  P1DIR = P1DIR|0x20;  //p1.5¹Ü½ÅÖÃÎªÊä³ö¹Ü½Å
-  P1DIR = P1DIR&0xBF;   //,P1.6¹Ü½ÅÉèÖÃÎªÊäÈë¹Ü½Å
-  P1OUT = P1OUT&0xBF;  //ÉèÖÃ1.6½ÅÄ¬ÈÏÊä³öÖµÎª0
+  P1DIR = P1DIR|0x20;  //p1.5ï¿½Ü½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ü½ï¿½
+  P1DIR = P1DIR&0xBF;   //,P1.6ï¿½Ü½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ü½ï¿½
+  P1OUT = P1OUT&0xBF;  //ï¿½ï¿½ï¿½ï¿½1.6ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÎª0
 }
 
 
@@ -81,10 +82,16 @@ void main(void)
   close_watch_dog();
   clk_init();
   Warner warnner;
+  Key key;
   warnner.SetCallBackFunc( LedFlash);
   while(1)
   {
-    warnner.Warning();
+      delay_ms(20);
+      if(key.KeyDetect()!= 0)
+      {
+      LedFlash();
+      }
+    
   }
   
 }

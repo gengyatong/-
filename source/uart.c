@@ -1,19 +1,18 @@
-#include "uart.h"
-#include "msp430x14x.h"
-#include "data_proc.h"
+//#include "uart.h"
+//#include "data_proc.h"
 
 void InitUART1(void)
 {
     P3SEL |= 0xC0;                            // P3.6,7 = USART1 TXD/RXD
-    P3DIR &= 0x7f;                            // rx¹Ü½ÅÉèÖÃÎªÊäÈë
+    P3DIR &= 0x7f;                            // rxï¿½Ü½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
     ME2 |= URXE1 + UTXE1;                     // Enable USART1 T/RXD
     UCTL1 |= CHAR;                            // 8-bit character
     UTCTL1 |= 0x30;                           // UCLK = SMCLK = 1M
-    UBR01 = 0xA0;                             // 1M/4800 = 208.333
+    UBR01 = 0xA0;                             // 1M/2400 = 208.333
     UBR11 = 0x01;                             //
     UMCTL1 = 0x89;                            // Modulation
     UCTL1 &= ~SWRST;                          // Initialize USART state machine
-    IE2 |= URXIE1;                            // Ê¹ÄÜUSART1µÄ½ÓÊÕÖÐ¶Ï
+    IE2 |= URXIE1;                            // Ê¹ï¿½ï¿½USART1ï¿½Ä½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
     _EINT();
 }
 
@@ -21,7 +20,7 @@ void InitUART1(void)
 void InitUART0(void)
 {
     P3SEL |= 0x30;                            // P3.5,6 = USART0 TXD/RXD
-    P3DIR &= 0x5f;                            // rx¹Ü½ÅÉèÖÃÎªÊäÈë
+    P3DIR &= 0x5f;                            // rxï¿½Ü½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
     ME1 |= URXE0 + UTXE0;                     // Enable USART1 T/RXD
     UCTL0 |= CHAR;                            // 8-bit character
     UTCTL0 |= 0x30;                           // UCLK = SMCLK = 1M
@@ -29,7 +28,7 @@ void InitUART0(void)
     UBR10 = 0x00;                             //
     UMCTL0 = 0xAB;                            // Modulation
     UCTL0 &= ~SWRST;                          // Initialize USART state machine
-    IE1 |= URXIE0;                            // Ê¹ÄÜUSART1µÄ½ÓÊÕÖÐ¶Ï
+    IE1 |= URXIE0;                            // Ê¹ï¿½ï¿½USART1ï¿½Ä½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
  //   _EINT();
 }
 
@@ -44,7 +43,7 @@ void SendData(unsigned char *Data, unsigned char length )
 }
 
 
-/*´®¿Ú1µÄÊý¾Ý½ÓÊÕÂß¼­£¬ÓÃÓÚ½ÓÊÕÍòÓÃ±íÐ¾Æ¬Êý¾Ý*/
+/*ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã±ï¿½Ð¾Æ¬ï¿½ï¿½ï¿½ï¿½*/
 
 unsigned char Data_Ready;
 
@@ -52,14 +51,14 @@ void receive_frame_UART1(unsigned char *p)
 {
    unsigned char temp,lastdata,flag;
    
-   temp=U1RXBUF;//ÏÈ½ÓÊÕÊý¾Ý
+   temp=U1RXBUF;//ï¿½È½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    flag=temp&0xf0;
-   if(flag==0x10)//¼ì²âµ½Ö¡Í·
+   if(flag==0x10)//ï¿½ï¿½âµ½Ö¡Í·
    {
      front=1;
      datanum=0;
    }
-   if(front)//Èç¹û¼ì²âµ½Ö¡Í·¾Í½øÈë¸Ãº¯Êý½ÓÊÕÊý¾Ý
+   if(front)//ï¿½ï¿½ï¿½ï¿½ï¿½âµ½Ö¡Í·ï¿½Í½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    {
       p[datanum++]=temp;
       lastdata= temp&0xf0;
@@ -85,7 +84,7 @@ __interrupt void UART1_RXISR(void)
 
 
 
-/*´®¿Ú0µÄÊý¾Ý½ÓÊÕÂß¼­£¬ÓÃÓÚ½ÓÊÕÔÆ¶ËÖ¸Áî*/
+/*ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Ö¸ï¿½ï¿½*/
 
 unsigned char Data_Ready_0;
 unsigned char CloudCmd = 0;
@@ -98,14 +97,14 @@ void receive_frame_UART0(void)
    unsigned char temp,lastdata,flag;
 
    
-   temp=U0RXBUF;//ÏÈ½ÓÊÕÊý¾Ý
+   temp=U0RXBUF;//ï¿½È½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    flag=temp&0xff;
-   if(flag==0x55)//¼ì²âµ½Ö¡Í·
+   if(flag==0x55)//ï¿½ï¿½âµ½Ö¡Í·
    {
      front0=1;
      datanum0=0;
    }
-   if(front0)//Èç¹û¼ì²âµ½Ö¡Í·¾Í½øÈë¸Ãº¯Êý½ÓÊÕÊý¾Ý
+   if(front0)//ï¿½ï¿½ï¿½ï¿½ï¿½âµ½Ö¡Í·ï¿½Í½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    {
       CmdBuff[datanum0]=temp;
       datanum0++;
@@ -117,7 +116,7 @@ void receive_frame_UART0(void)
       CloudCmd = CmdBuff[1];
       Data_Ready_0 = 1;
       }
-      else if (datanum0==3&&lastdata!=0xAA)   //Èç¹ûË÷ÒýºÅ¼Óµ½3£¬µ«ÊÇ°üÎ²²»·ûºÏ£¬Ôò·ÅÆúÖ¸Áî£¬ÈÏÎªÖ¸Áî²»ÍêÕû
+      else if (datanum0==3&&lastdata!=0xAA)   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¼Óµï¿½3ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Î²ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½î£¬ï¿½ï¿½ÎªÖ¸ï¿½î²»ï¿½ï¿½ï¿½ï¿½
       {
       datanum0=0;
       front0=0;

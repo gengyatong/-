@@ -2166,7 +2166,7 @@
         <name>$PROJ_DIR$\source\GPIO.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\source\key.c</name>
+        <name>$PROJ_DIR$\source\key.cpp</name>
     </file>
     <file>
         <name>$PROJ_DIR$\source\key.h</name>
@@ -2184,7 +2184,7 @@
         <name>$PROJ_DIR$\source\oledfont.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\source\uart.c</name>
+        <name>$PROJ_DIR$\source\uart.cpp</name>
     </file>
     <file>
         <name>$PROJ_DIR$\source\uart.h</name>

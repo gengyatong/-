@@ -810,7 +810,7 @@
                     <item>PxSEL</item>
                     <item>*PxDIR</item>
                     <item>j</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

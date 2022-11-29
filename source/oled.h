@@ -2,6 +2,9 @@
 #define __OLED_H			  	       
 
 #include "msp430x14x.h"
+#include "stdlib.h"
+#include "oledfont.h"  	 
+#include "main.h"
 
 //OLED模式设置
 //0: 4线串行模式  （模块的BS1，BS2均接GND）
@@ -34,11 +37,6 @@ void OLED_RS( char flag );
 void OLED_SCLK( char flag );
 void OLED_SDIN( char flag );
 
-extern void delay_ms( volatile unsigned int time );  //延迟函数
-
-#define CPU_CLOCK       8000000
-#define delay_ms(ms)    __delay_cycles(CPU_CLOCK/1000*(ms))
- #define delay_us(us)    __delay_cycles(CPU_CLOCK/1000000*(us))
 
 #endif  
 	 

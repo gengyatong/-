@@ -1,6 +1,4 @@
 #include "oled.h"
-#include "stdlib.h"
-#include "oledfont.h"  	 
 
 
 

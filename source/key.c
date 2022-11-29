@@ -1,23 +1,23 @@
-#include "key.h"
+//#include "key.h"
 #include "msp430x14x.h"
 
 void key_init (void )
 {
-    P4DIR = 0X00;   //ÉèÖÃP4¶Ë¿ÚÎªÊäÈë
+    P4DIR = 0X00;   //ï¿½ï¿½ï¿½ï¿½P4ï¿½Ë¿ï¿½Îªï¿½ï¿½ï¿½ï¿½
 }
 
 char key_detect (void )
 {
   char key_value ; 
   switch ( P4IN&0x7e )
-  {                           //ÓÐ°´¼üÎªµÍ£¬ÔòËµÃ÷±»°´ÏÂ
+  {                           //ï¿½Ð°ï¿½ï¿½ï¿½Îªï¿½Í£ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     case 0x7c : key_value = key_hold ;     break; 
     case 0x7a : key_value = key_up1  ;     break;
     case 0x76 : key_value = key_down1;     break;
     case 0x6e : key_value = key_up2;       break;
     case 0x5e : key_value = key_down2;     break;
     case 0x3e : key_value = key_warning;   break;
-    default   : key_value = key_null      ;break;     //·ÇÒÔÉÏÖµ´ú±íÎÞ°´¼ü°´ÏÂ
+    default   : key_value = key_null      ;break;     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Þ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   }          
   return key_value;
 }

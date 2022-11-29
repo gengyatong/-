@@ -1,9 +1,11 @@
-extern "C"{
+#ifndef _GPIO_H
+#define _GPIO_H
+
+extern "C" {
 #include "msp430x14x.h" 
 }
 #include <stdlib.h>
-#ifndef _GPIO_H
-#define _GPIO_H
+
 
 namespace Msp430GPIO
 {
@@ -59,9 +61,10 @@ namespace Msp430GPIO
 class Gpio
   {
   public :  
-        
+      //对应IO口输出（运算符重载） 
       void operator=(unsigned char value); 
-        
+      //对应IO口输入读取（暂未编写）
+
         //构造函数
       Gpio( GpioConfig *Gpio);
         
