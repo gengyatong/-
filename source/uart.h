@@ -22,7 +22,7 @@ typedef enum
     Bps2400,    //2400波特率用于gc7721
 }Bps;
 
-//(暂未使用)设置串口所必要的寄存器值内容
+/*(暂未使用)设置串口所必要的寄存器值内容
 typedef struct uartRegistList
 {   
     //输入输出使能寄存器内容
@@ -38,7 +38,7 @@ typedef struct uartRegistList
     unsigned int* UMCTL;
     //中断寄存器
     unsigned int* IE ; 
-}UartRegistList;
+}UartRegistList;*/
 
 typedef struct uartConfig
 {
@@ -59,9 +59,12 @@ private:
     void InitUART0(void);
     Gpio *uartTx;
     Gpio *uartRx;
+    UartConfig uartConfigSave;
 public:
     Uart(UartConfig *UartCfg);
     ~Uart();
+    unsigned char  UartRxData();
+    void UartTxData(unsigned char* ,unsigned char length );
 };
 
 /*

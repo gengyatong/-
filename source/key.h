@@ -5,7 +5,6 @@ extern "C"
 #include "msp430x14x.h" 
 }
 #include "GPIO.h" 
-#include "main.h"
 
 /*************类设计说明************/
 //按键类（key）里面包含了板子所需要的所有按键（6个）

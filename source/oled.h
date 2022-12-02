@@ -5,19 +5,18 @@
 #include "stdlib.h"
 #include "oledfont.h"  	 
 #include "main.h"
-
-//OLEDÄ£Ê½ÉèÖÃ
-//0: 4Ïß´®ÐÐÄ£Ê½  £¨Ä£¿éµÄBS1£¬BS2¾ù½ÓGND£©
-//1: ²¢ÐÐ8080Ä£Ê½ £¨Ä£¿éµÄBS1£¬BS2¾ù½ÓVCC£©
+//OLEDÄ£Ê½ï¿½ï¿½ï¿½ï¿½
+//0: 4ï¿½ß´ï¿½ï¿½ï¿½Ä£Ê½  ï¿½ï¿½Ä£ï¿½ï¿½ï¿½BS1ï¿½ï¿½BS2ï¿½ï¿½ï¿½ï¿½GNDï¿½ï¿½
+//1: ï¿½ï¿½ï¿½ï¿½8080Ä£Ê½ ï¿½ï¿½Ä£ï¿½ï¿½ï¿½BS1ï¿½ï¿½BS2ï¿½ï¿½ï¿½ï¿½VCCï¿½ï¿½
 #define OLED_MODE 	0 
 		    						  				   
 typedef unsigned char u8;
 typedef unsigned long u16;	
 
-#define OLED_CMD  	0		//Ð´ÃüÁî
-#define OLED_DATA 	1		//Ð´Êý¾Ý
+#define OLED_CMD  	0		//Ð´ï¿½ï¿½ï¿½ï¿½
+#define OLED_DATA 	1		//Ð´ï¿½ï¿½ï¿½ï¿½
 
-//OLED¿ØÖÆÓÃº¯Êý
+//OLEDï¿½ï¿½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½
 void OLED_WR_Byte(u8 dat,u8 cmd);	    
 void OLED_Display_On(void);
 void OLED_Display_Off(void);

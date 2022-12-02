@@ -1,4 +1,4 @@
-//#include "main.h"
+#include "main.h"
 #include  "msp430x14x.h"
 #define CPU_CLOCK       8000000
 #define delay_ms(ms)    __delay_cycles(CPU_CLOCK/1000*(ms))
@@ -112,12 +112,8 @@ void main(void)
  //     }
     
   }
-  
-  
-  
 }
-
-//串口0中断处理函数
+  //串口0中断处理函数
 #pragma  vector = UART1RX_VECTOR
 extern "C"    __interrupt void UART1_RXISR(void)
 {

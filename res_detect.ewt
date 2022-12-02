@@ -2160,10 +2160,22 @@
         <name>$PROJ_DIR$\source\data_proc.h</name>
     </file>
     <file>
+        <name>$PROJ_DIR$\source\GC7721.cpp</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\source\GC7721.h</name>
+    </file>
+    <file>
         <name>$PROJ_DIR$\source\GPIO.cpp</name>
     </file>
     <file>
         <name>$PROJ_DIR$\source\GPIO.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\source\interupt.cpp</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\source\interupt.h</name>
     </file>
     <file>
         <name>$PROJ_DIR$\source\key.cpp</name>
@@ -2172,7 +2184,10 @@
         <name>$PROJ_DIR$\source\key.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\main.c</name>
+        <name>$PROJ_DIR$\main.cpp</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\source\main.h</name>
     </file>
     <file>
         <name>$PROJ_DIR$\source\oled.c</name>
