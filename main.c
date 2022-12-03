@@ -64,8 +64,8 @@ void strcopy( unsigned char end[]  ,unsigned char source[]  , unsigned char leng
 void main(void)
 {
 
-  unsigned char  thresh_2 = 20 ;
-  unsigned char  thresh_1 = 10;
+  unsigned char  thresh_2 = 80 ;
+  unsigned char  thresh_1 = 70;
  
   int key_value = 0 ;       //检测当前按键值
   int key_value_reg = 0 ;   //锁存上一次按键值
