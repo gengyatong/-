@@ -2,7 +2,7 @@
 #define _UART_H
 
 extern "C" {
-#include "msp430x14x.h" 
+#include <msp430.h> 
 }
 #include "GPIO.h"
 

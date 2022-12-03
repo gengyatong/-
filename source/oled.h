@@ -4,7 +4,7 @@
 #include "msp430x14x.h"
 #include "stdlib.h"
 #include "oledfont.h"  	 
-#include "main.h"
+#include "delay.h"
 //OLEDģʽ����
 //0: 4�ߴ���ģʽ  ��ģ���BS1��BS2����GND��
 //1: ����8080ģʽ ��ģ���BS1��BS2����VCC��

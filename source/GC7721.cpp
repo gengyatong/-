@@ -3,7 +3,7 @@
 GC7721::GC7721(uartConfig * uartCfg):Uart( uartCfg )
 {
    //定义处理方法指针默认为空
-   GC7721Str2Proc = NULL;
+   this->GC7721Str2Proc = NULL;
 }
 
 GC7721::~GC7721()

@@ -52,12 +52,12 @@ extern "C" {
         ME2 |= URXE1 + UTXE1;                     // Enable USART1 T/RXD
         UCTL1 |= CHAR;                            // 8-bit character
         UTCTL1 |= 0x30;                           // UCLK = SMCLK = 1M
-        UBR01 = 0xA0;                             // 1M/2400 = 416.666
+        UBR01 = 0xA0;                             // 1M/2400 = 208.333
         UBR11 = 0x01;                             //
         UMCTL1 = 0x89;                            // Modulation
         UCTL1 &= ~SWRST;                          // Initialize USART state machine
         IE2 |= URXIE1;                            // ʹ��USART1�Ľ����ж�
-        _EINT();
+        __bis_SR_register( GIE); 
     }
 
 //两个串口的发送函数分开处理

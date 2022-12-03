@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "gpio.h": "cpp",
+        "msp430x14x.h": "c",
+        "data_proc.h": "c",
+        "uart.h": "cpp",
+    }
+}
