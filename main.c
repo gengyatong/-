@@ -276,7 +276,7 @@ void main(void)
     }
     
    if (( (thresh_2_value_L > res_now)||(thresh_2_value_H < res_now)  )&&(waring_sw == 0xFF)&&(res_now != 50000))      {  
-       for(int i= 0; i<150; i++ ) {
+       for(int i= 0; i<100; i++ ) {
         delay_us(150);
         P5OUT = P5OUT | 0x08;   
         delay_us(150);
@@ -286,7 +286,7 @@ void main(void)
     {
       DeviceState = DeviceState &0xfB;
       P5OUT = P5OUT & 0xF7 ;
-      delay_ms(30);
+      delay_ms(10);
     }
    
      strcopy(dataToSend.dataInit,data_display_reg,9);
