@@ -1,10 +1,7 @@
 #include "warner.h"
 
 
-void Warner::SetWarningSW(unsigned char warningSw)
-{
-    warningSw_ = warningSw;
-}
+
 
 Warner::Warner()
 {
@@ -31,12 +28,26 @@ void Warner:: SetCallBackFunc( void(*func)() )
     func_ = func;
 }
 
+
+void Warner::SetWarning()
+{
+    warningSw_ = 0xff;
+    Warning();
+}
+
+void Warner::ClearWarning()
+{
+    warningSw_ = 0x00;
+    Warning(); 
+}
+
+
 void Warner::Warning( )
 {   //如果报警功能开启,则蜂鸣器运行，Led点亮
     if(warningSw_ == 0xff)
     {   
         BeeperGo();
- //       *Led = 1;
+        *Led = 1;
     }
     //否则关闭蜂鸣器与LED
     else

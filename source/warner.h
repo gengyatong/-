@@ -15,12 +15,13 @@ class Warner
     public :
         Warner();
         ~Warner();
-        //由数据处理模块设置是否开始报警提示
-        void SetWarningSW(unsigned char);
+        //由数据处理模块设置开始报警提示
+        void SetWarning();
+        //由数据处理模块设置停止报警
+        void ClearWarning();
         //设置报警过程中的按键检测或其他回调函数，以提高报警过程中对其他输入的相应频率
         void SetCallBackFunc( void(*func)() );
-        //实现报警功能
-        void Warning( );
+ 
     private :
         //报警状态开关
         unsigned char warningSw_ ;
@@ -31,6 +32,8 @@ class Warner
         //声明led和蜂鸣器IO
         Gpio *Led;
         Gpio *Beeper;
+        //实现报警功能
+        void Warning( );
 };
 
 #endif
