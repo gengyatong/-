@@ -1,5 +1,5 @@
 #include "oled.h"
-
+#include <msp430.h>
 
 
 /*
@@ -68,7 +68,9 @@ u8 OLED_GRAM[128][8];
 
 //�����Դ浽LCD		 
 void OLED_Refresh_Gram(void)
-{
+{ 
+	//刷新显示屏幕过程中，关闭中断
+	__bic_SR_register( GIE); 
 	u8 i,n;		    
 	for(i=0;i<8;i++)  
 	{  
@@ -77,6 +79,8 @@ void OLED_Refresh_Gram(void)
 		OLED_WR_Byte (0x10,OLED_CMD);      //������ʾλ�á��иߵ�ַ   
 		for(n=0;n<128;n++)OLED_WR_Byte(OLED_GRAM[n][i],OLED_DATA); 
 	}   
+	//刷新显示屏幕完成后，打开中断
+	__bis_SR_register( GIE); 
 }
 //��SSD1306д��һ���ֽڡ�
 //dat:Ҫд�������/����

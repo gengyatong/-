@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <settings>
     <DebugChecksum>
-        <Checksum>2450953395</Checksum>
+        <Checksum>3676785137</Checksum>
     </DebugChecksum>
     <State_Storage>
         <Control_Register>-1</Control_Register>
@@ -37,7 +37,7 @@
         <WarningThreshold>90</WarningThreshold>
         <SpWarningsEnabled>1</SpWarningsEnabled>
         <WarnLogOnly>1</WarnLogOnly>
-        <UseTrigger>1</UseTrigger>
+        <UseTrigger>0</UseTrigger>
         <TriggerName>main</TriggerName>
         <LimitSize>0</LimitSize>
         <ByteLimit>50</ByteLimit>

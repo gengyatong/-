@@ -29,25 +29,27 @@ void Warner:: SetCallBackFunc( void(*func)() )
 }
 
 
-void Warner::SetWarning()
+void Warner::SetWarning(unsigned char WarningSelect)
 {
     warningSw_ = 0xff;
-    Warning();
+    Warning(WarningSelect);
 }
 
-void Warner::ClearWarning()
+void Warner::ClearWarning(unsigned char WarningSelect )
 {
     warningSw_ = 0x00;
-    Warning(); 
+    Warning(WarningSelect); 
 }
 
 
-void Warner::Warning( )
+void Warner::Warning(unsigned char WarningSelect )
 {   //如果报警功能开启,则蜂鸣器运行，Led点亮
     if(warningSw_ == 0xff)
     {   
-        BeeperGo();
-        *Led = 1;
+        if(WarningSelect&0x01 == 0x01) 
+           {*Led = 1;}
+        if(WarningSelect&0x02 == 0x02) 
+           {BeeperGo();}
     }
     //否则关闭蜂鸣器与LED
     else

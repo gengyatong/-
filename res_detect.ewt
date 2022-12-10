@@ -2160,7 +2160,19 @@
         <name>$PROJ_DIR$\source\data_proc.h</name>
     </file>
     <file>
+        <name>$PROJ_DIR$\source\dataProc.cpp</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\source\dataProc.h</name>
+    </file>
+    <file>
         <name>$PROJ_DIR$\source\delay.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\source\Display.cpp</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\source\Display.h</name>
     </file>
     <file>
         <name>$PROJ_DIR$\source\GC7721.cpp</name>

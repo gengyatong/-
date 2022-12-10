@@ -4,7 +4,6 @@ extern "C"
 }
 
 extern GC7721 *gc7721;
-
 int i = 0 ;
 //串口0中断处理函数
 // UART0 RX ISR will for exit from LPM3 in Mainloop

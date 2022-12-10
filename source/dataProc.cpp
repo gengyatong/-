@@ -1,23 +1,23 @@
 #include "dataProc.h"
 
-dataProc::dataProc(unsigned char * initDisplay ,float resInit ) 
+DataProc::DataProc(unsigned char * initDisplay) 
 {
   //默认报警功能开关开启
   WarningSW_ = 0XFF;
   //默认初始电阻值为1000(K)
-  res_init = resInit;
+  res_init = 1000;
   //初始化显示字符串
-  for(int i=0;i<13;i++)
-  {
-    initRes_display[i] = initDisplay[i];
-  }
+for(int i =0;i<13;i++)
+   {
+     initRes_display[i] = initDisplay[i];
+   }
 }
 
-dataProc::~dataProc()
+DataProc::~DataProc()
 {
 }
 //获取GC7721帧数据
-void dataProc:: GetGC7721Frame( const unsigned char * frameData )
+ void DataProc:: GetGC7721Frame( const unsigned char * frameData )
 {
     //如果指针不为0，则说明缓冲区存满了一帧数据，这时候要赋值到本地存储区
     if(frameData!=NULL)
@@ -40,7 +40,7 @@ void dataProc:: GetGC7721Frame( const unsigned char * frameData )
       }
 }
 //获取按键键值
-void dataProc:: GetKeyValue( unsigned char keyValue)
+void DataProc:: GetKeyValue( unsigned char keyValue)
 {
     ManageThresh(keyValue);
     ManageSW(keyValue);
@@ -51,25 +51,25 @@ void dataProc:: GetKeyValue( unsigned char keyValue)
       RecordResValue();
     }
 }
-//获取显示数据 dataIn  7721传入的数据
-unsigned char * dataProc:: GetDisplayString(const unsigned char *dataIn)
+//获取显示数据 GC7721FrameData_  7721传入的数据
+unsigned char * DataProc:: GetDisplayString()
 {
   unsigned char temp[4]           = {0,0,0,0};
   unsigned char num_deci_char [4] = { 0,0,0,0};
   unsigned char dp_char[3]        = {0,0,0};
   unsigned char unit_char[2]  = {0,0};
   //将GC7721发送的数码管数据恢复成可以识别的数据
-  temp[0]=(((dataIn[1]&0x01)<<6)|(dataIn[1]&0x02)|(dataIn[1]&0x04)|                                        //��������λ
-	    ((dataIn[2]&0x01)<<5)|((dataIn[2]&0x02)>>1)|((dataIn[2]&0x04)<<2)|(dataIn[2]&0x08));
+  temp[0]=(((GC7721FrameData_[1]&0x01)<<6)|(GC7721FrameData_[1]&0x02)|(GC7721FrameData_[1]&0x04)|                                        //��������λ
+	    ((GC7721FrameData_[2]&0x01)<<5)|((GC7721FrameData_[2]&0x02)>>1)|((GC7721FrameData_[2]&0x04)<<2)|(GC7721FrameData_[2]&0x08));
 
-	temp[1]=(((dataIn[3]&0x01)<<6)|(dataIn[3]&0x02)|(dataIn[3]&0x04)|                  
-		((dataIn[4]&0x01)<<5)|((dataIn[4]&0x02)>>1)|((dataIn[4]&0x04)<<2)|(dataIn[4]&0x08));
+	temp[1]=(((GC7721FrameData_[3]&0x01)<<6)|(GC7721FrameData_[3]&0x02)|(GC7721FrameData_[3]&0x04)|                  
+		((GC7721FrameData_[4]&0x01)<<5)|((GC7721FrameData_[4]&0x02)>>1)|((GC7721FrameData_[4]&0x04)<<2)|(GC7721FrameData_[4]&0x08));
 
-	temp[2]=(((dataIn[5]&0x01)<<6)|(dataIn[5]&0x02)|(dataIn[5]&0x04)|
-		((dataIn[6]&0x01)<<5)|((dataIn[6]&0x02)>>1)|((dataIn[6]&0x04)<<2)|(dataIn[6]&0x08));
+	temp[2]=(((GC7721FrameData_[5]&0x01)<<6)|(GC7721FrameData_[5]&0x02)|(GC7721FrameData_[5]&0x04)|
+		((GC7721FrameData_[6]&0x01)<<5)|((GC7721FrameData_[6]&0x02)>>1)|((GC7721FrameData_[6]&0x04)<<2)|(GC7721FrameData_[6]&0x08));
 
-	temp[3]=(((dataIn[7]&0x01)<<6)|(dataIn[7]&0x02)|(dataIn[7]&0x04)|                                        //��������λ
-		((dataIn[8]&0x01)<<5)|((dataIn[8]&0x02)>>1)|((dataIn[8]&0x04)<<2)|(dataIn[8]&0x08));      
+	temp[3]=(((GC7721FrameData_[7]&0x01)<<6)|(GC7721FrameData_[7]&0x02)|(GC7721FrameData_[7]&0x04)|                                        //��������λ
+		((GC7721FrameData_[8]&0x01)<<5)|((GC7721FrameData_[8]&0x02)>>1)|((GC7721FrameData_[8]&0x04)<<2)|(GC7721FrameData_[8]&0x08));      
     
 	for(int j=0; j<4; j++)
 	{
@@ -90,7 +90,7 @@ unsigned char * dataProc:: GetDisplayString(const unsigned char *dataIn)
 		}
 	}   
 //查看是否存在小数点，及小数点位置
-          if( dataIn[3]&0x8 )                                                                   
+          if( GC7721FrameData_[3]&0x8 )                                                                   
           {
             dp[0] = 1 ;
             dp_char[0] = '.';
@@ -100,7 +100,7 @@ unsigned char * dataProc:: GetDisplayString(const unsigned char *dataIn)
             dp[0] = 0 ;
             dp_char[0] = ' ';
           }
-          if(dataIn[5]&0x8 )
+          if(GC7721FrameData_[5]&0x8 )
           {
             dp[1] = 1 ;
             dp_char[1] = '.';
@@ -110,7 +110,7 @@ unsigned char * dataProc:: GetDisplayString(const unsigned char *dataIn)
             dp[1] = 0 ;
             dp_char[1] = ' ';
           }
-          if(dataIn[7]&0x8)                                                                      //���λС����
+          if(GC7721FrameData_[7]&0x8)                                                                      //���λС����
           { 
             dp[2] = 1 ;
             dp_char[2] = '.';
@@ -122,7 +122,7 @@ unsigned char * dataProc:: GetDisplayString(const unsigned char *dataIn)
           }
    
 //查看单位（K/M）
-          if( dataIn[9]&0x2 )                                                                    
+          if( GC7721FrameData_[9]&0x2 )                                                                    
           {
             unit[0] = 1 ;         
             unit_char[0] = 'K';
@@ -132,7 +132,7 @@ unsigned char * dataProc:: GetDisplayString(const unsigned char *dataIn)
             unit[0] = 0 ;
             unit_char[0] = ' ';
           }
-          if (dataIn[10]&0x2 )
+          if (GC7721FrameData_[10]&0x2 )
           {  
             unit[1] = 1 ;
             unit_char[1] = 'M';
@@ -159,12 +159,12 @@ unsigned char * dataProc:: GetDisplayString(const unsigned char *dataIn)
        return data_display;
 }
 //返回需要显示的init栏显示的电阻数值字符串指针
-unsigned char * dataProc:: GetRecordDisplayString()
+unsigned char * DataProc:: GetRecordDisplayString()
 {
   return initRes_display;
 }
 //获取检测到的电阻值  num：数字部分  dp 小数点部分
-float dataProc:: GetDecRes(const unsigned char *num , const unsigned char *dp )
+float DataProc:: GetDecRes(const unsigned char *num , const unsigned char *dp )
 {  
        if( num[2] == 10 )
        {
@@ -240,7 +240,7 @@ float dataProc:: GetDecRes(const unsigned char *num , const unsigned char *dp )
 //产生是否报警的标志，
 //返回值bit[0]  1：需要LED报警：   返回值：0不需要LED报警
 //返回值bit[1]  1: 需要蜂鸣器报警； 返回值：0不需要蜂鸣器报警
- unsigned char dataProc:: WarningFlag()
+ unsigned char DataProc:: WarningFlag()
  {   
   unsigned char  WarningFlag;
   float thresh_2_value_H;
@@ -268,7 +268,7 @@ float dataProc:: GetDecRes(const unsigned char *num , const unsigned char *dp )
   return WarningFlag;   
  }
 //管理阈值
-void dataProc::ManageThresh(unsigned char KeyValue)
+void DataProc::ManageThresh(unsigned char KeyValue)
 {
    switch( KeyValue )
       {
@@ -305,13 +305,13 @@ void dataProc::ManageThresh(unsigned char KeyValue)
 
 }
 //管理报警阈值标志
-void dataProc::ManageSW(unsigned char KeyValue)
+void DataProc::ManageSW(unsigned char KeyValue)
 {
   if(KeyValue == key_warning)
       WarningSW_ = ~ WarningSW_;
 }
 //更新初始电阻值其显示字符串
-void dataProc::RecordResDisplay()
+void DataProc::RecordResDisplay()
 {
   for(int i=0;i<13;i++)
     {
@@ -319,7 +319,7 @@ void dataProc::RecordResDisplay()
     }
 }
 //更新初始电阻值
-void dataProc:: RecordResValue()
+void DataProc:: RecordResValue()
 {
   res_init = res_cal;
 }

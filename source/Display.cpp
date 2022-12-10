@@ -1,4 +1,10 @@
 #include "Display.h"
+extern "C"
+{
+#include "oled.h"
+#include "oledfont.h"
+}
+
 
 using namespace Msp430GPIO;
 
@@ -27,7 +33,7 @@ void Display::displayInit()
     GpioConfig sda = { Port1,Pin3,iofunc,ioOutput };
     Gpio *SDA = new Gpio(&sda);
 
-    GpioConfig sck = { Port1,Pin3,iofunc,ioOutput };
+    GpioConfig sck = { Port1,Pin4,iofunc,ioOutput };
     Gpio *SCK = new Gpio(&sck);
     //调用C函数
     OLED_Init(); 
@@ -52,20 +58,24 @@ void Display::ShowString(unsigned char x,unsigned char y,unsigned char *str ,uns
 {
     //调用C的函数
     OLED_ShowString( x,y,str,size);
-    OLED_Refresh_Gram();                      //刷新屏幕显示
 }
 
 void Display::ShowChar(unsigned char x,unsigned char y,unsigned char str ,unsigned char size ,unsigned char mode )
 {
     //调用C的函数
     OLED_ShowChar(x,y,str,size,mode);
-    OLED_Refresh_Gram();                      //刷新屏幕显示
 }
 
 void Display::ShowNUM(unsigned char x,unsigned char y,unsigned long num,unsigned char len,unsigned char size)
 {
     OLED_ShowNum(x,y,num,len,size);
+}
+
+void Display::RefreshScreen()
+{
+    //调用C 的刷新屏幕显示
     OLED_Refresh_Gram();                      //刷新屏幕显示
 }
+
 
 

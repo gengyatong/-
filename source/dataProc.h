@@ -5,7 +5,7 @@
 #include "GC7721.h"
 #include "key.h"
 
-class dataProc
+class DataProc
 {
 private:
     /* data */
@@ -39,19 +39,21 @@ private:
 
 public:
     //需要设置初始显示的电阻值字符串，以及初始电阻值
-    dataProc(unsigned char * ,float );
-    ~dataProc();
+    DataProc(unsigned char * );
+    ~DataProc();
     //读取按键值
     void GetKeyValue( unsigned char );
     //获取缓冲区数据,传入7721帧数据缓冲区指针，并将显示的数据保存在本类的缓冲区中
     void GetGC7721Frame( const unsigned char * );
     //将GC7721数据转换成显示字符串,存入data_display数组
-    unsigned char * GetDisplayString(const unsigned char *);
+    unsigned char * GetDisplayString();
     //返回需要显示的init栏显示的电阻数值字符串指针
     unsigned char * GetRecordDisplayString();
     //将GC7721传来的数据计算成十进制
     float GetDecRes(const unsigned char *num , const unsigned char *dp );
     //产生是否报警的标志
+    //返回值bit[0]  1：需要LED报警：   返回值：0不需要LED报警
+    //返回值bit[1]  1: 需要蜂鸣器报警； 返回值：0不需要蜂鸣器报警
     unsigned char WarningFlag();
 
 };
