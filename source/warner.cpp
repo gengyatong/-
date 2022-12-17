@@ -46,10 +46,15 @@ void Warner::Warning(unsigned char WarningSelect )
 {   //如果报警功能开启,则蜂鸣器运行，Led点亮
     if(warningSw_ == 0xff)
     {   
-        if(WarningSelect&0x01 == 0x01) 
-           {*Led = 1;}
-        if(WarningSelect&0x02 == 0x02) 
+        if((WarningSelect&0x01) == 0x01) 
+            {*Led = 1;}
+        else
+            {*Led = 0;}
+        
+        if((WarningSelect&0x02) == 0x02) 
            {BeeperGo();}
+        else
+            {*Beeper = 0;}
     }
     //否则关闭蜂鸣器与LED
     else

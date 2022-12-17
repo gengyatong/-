@@ -24,17 +24,14 @@ GC7721::~GC7721()
 {
 }
 
-void GC7721:: SetDataProcModule(DataProc* dataProc)
+void GC7721::DisableInterupt()
 {
-      dataProc_ = dataProc;
+   IE2 &= ~URXIE1; 
 }
 
-void GC7721:: GC7721Str2Proc( )
+void GC7721::EnableInterupt()
 {
-   if(dataProc_ != NULL)
-      dataProc_->GetGC7721Frame(rdat);
-   else
-      return;
+   IE2 |= URXIE1;
 }
 
 void GC7721::receive_frame_GC7721()
@@ -59,7 +56,7 @@ void GC7721::receive_frame_GC7721()
       //datanum=0;
        front=0;
        //数据接收完成,调用其他模块的方法,将收到的帧数据传输给其他模块
-       GC7721Str2Proc();
+       ReiceiveDoneCallback(rdat);
       }
        }
    }   

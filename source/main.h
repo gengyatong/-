@@ -12,4 +12,8 @@ extern "C" {
 #include "interupt.h"
 #include "delay.h"
 #include "dataProc.h"
+//用于定义GC7721一帧数据接收完成后的处理函数
+void DataProcGetString(unsigned char *);
+
+
 #endif

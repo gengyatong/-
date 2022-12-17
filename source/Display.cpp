@@ -1,4 +1,5 @@
 #include "Display.h"
+#include "GC7721.h"
 extern "C"
 {
 #include "oled.h"
@@ -72,10 +73,10 @@ void Display::ShowNUM(unsigned char x,unsigned char y,unsigned long num,unsigned
 }
 
 void Display::RefreshScreen()
-{
+{   
     //调用C 的刷新屏幕显示
     OLED_Refresh_Gram();                      //刷新屏幕显示
-}
+}   
 
 
 

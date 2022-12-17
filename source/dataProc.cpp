@@ -1,11 +1,20 @@
 #include "dataProc.h"
-
+#include "GC7721.h"
 DataProc::DataProc(unsigned char * initDisplay) 
 {
   //默认报警功能开关开启
   WarningSW_ = 0XFF;
   //默认初始电阻值为1000(K)
   res_init = 1000;
+  //默认开机还未接收到完整数据时，阻值为1000；
+  res_cal = 1000;
+  //蜂鸣器报警阈值为85%
+  thresh_2 = 85;
+  //led报警阈值为75%
+  thresh_1 = 75;
+  //初始状态下，数据接收完成标志为0
+  dataReady = 0;
+
   //初始化显示字符串
 for(int i =0;i<13;i++)
    {
@@ -19,23 +28,21 @@ DataProc::~DataProc()
 //获取GC7721帧数据
  void DataProc:: GetGC7721Frame( const unsigned char * frameData )
 {
-    //如果指针不为0，则说明缓冲区存满了一帧数据，这时候要赋值到本地存储区
+    //当GC7721完成一帧完整数据接收后，将dataReady拉高，数据处理模块才进行数据处理
     if(frameData!=NULL)
         {
-        //在赋值数据的时候，需要关闭GC7721对应的串口中断，以免发生数据不完整  
-        IE2 &= ~URXIE1; 
           for(int i = 0 ;i<14;i++)
           {
             GC7721FrameData_[i] = frameData[i];
           }
-        //复制完成后，重新打开中断
-        IE2 |= URXIE1;
+          dataReady = 1 ;
         }    
       else
       {
         for(int i = 0 ;i<14;i++)
           {
             GC7721FrameData_[i] = 0;
+            dataReady = 0;
           }
       }
 }
@@ -54,6 +61,13 @@ void DataProc:: GetKeyValue( unsigned char keyValue)
 //获取显示数据 GC7721FrameData_  7721传入的数据
 unsigned char * DataProc:: GetDisplayString()
 {
+  if(dataReady == 0)
+    {
+      GC7721::EnableInterupt();  
+      return data_display;
+    }
+
+  GC7721::DisableInterupt();
   unsigned char temp[4]           = {0,0,0,0};
   unsigned char num_deci_char [4] = { 0,0,0,0};
   unsigned char dp_char[3]        = {0,0,0};
@@ -156,7 +170,8 @@ unsigned char * DataProc:: GetDisplayString()
        data_display[10]= 'h';
        data_display[11] = 'm'; 
        data_display[12] = '\0'; 
-       return data_display;
+       GC7721::EnableInterupt();  
+       return data_display;  
 }
 //返回需要显示的init栏显示的电阻数值字符串指针
 unsigned char * DataProc:: GetRecordDisplayString()
@@ -164,8 +179,14 @@ unsigned char * DataProc:: GetRecordDisplayString()
   return initRes_display;
 }
 //获取检测到的电阻值  num：数字部分  dp 小数点部分
-float DataProc:: GetDecRes(const unsigned char *num , const unsigned char *dp )
-{  
+//float DataProc:: GetDecRes(const unsigned char *num , const unsigned char *dp )
+float DataProc:: GetDecRes()
+{ 
+      if(dataReady == 0)
+      {
+        return res_cal;
+      } 
+
        if( num[2] == 10 )
        {
          res_cal = 50000;      //如果出现了0.L，则认为超载，直接复制50M 
@@ -235,6 +256,8 @@ float DataProc:: GetDecRes(const unsigned char *num , const unsigned char *dp )
           res_cal = num[0]*1000 + num[1]*100 + num[2]*10 + num[3] ; 
           res_cal = res_cal/1000;
        }
+      //完成一帧数据对应的电阻值计算后，重新将数据就绪标志拉低  
+      dataReady = 0;  
       return res_cal;
 }
 //产生是否报警的标志，
@@ -261,9 +284,13 @@ float DataProc:: GetDecRes(const unsigned char *num , const unsigned char *dp )
   thresh_1_value_L = (float)(100-thresh_1)/100*res_init; 
 
   if (((thresh_1_value_L > res_cal)||(thresh_1_value_H < res_cal))&&(res_cal != 50000) )  
-    WarningFlag = WarningFlag |0x01;      
+    WarningFlag = WarningFlag |0x01;
+  else 
+    WarningFlag = WarningFlag &(~0x01);
   if (((thresh_2_value_L > res_cal)||(thresh_2_value_H < res_cal))&&(res_cal != 50000))      
-    WarningFlag = WarningFlag |0x10;
+    WarningFlag = WarningFlag |0x02;
+  else
+    WarningFlag = WarningFlag &(~0x02);
   }
   return WarningFlag;   
  }
@@ -323,3 +350,21 @@ void DataProc:: RecordResValue()
 {
   res_init = res_cal;
 }
+
+unsigned char DataProc::  GetThread1Value()
+{
+  return thresh_1;
+}
+unsigned char DataProc::  GetThread2Value()
+{
+  return thresh_2;
+}
+
+const char * DataProc::GetWarningSW()
+{
+  if(WarningSW_ == 0xff)
+    return "ON ";
+  else
+    return "OFF";
+}
+

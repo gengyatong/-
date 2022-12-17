@@ -1,6 +1,9 @@
 #include "main.h"
 #include <msp430.h>
 #include "Display.h"
+extern "C"{
+#include "oled.h"
+}
 void clk_init()
 {
 
@@ -39,18 +42,6 @@ void strcopy( unsigned char end[]  ,unsigned char source[]  , unsigned char leng
   }
 }
 
-//using namespace Msp430GPIO;
-
-void LedFlash()
-{
-       for(int i= 0; i<10; i++ ) {
-        delay_ms(150);
-        P5OUT = P5OUT | 0x10;   
-        delay_ms(150);
-        P5OUT = P5OUT & 0xEF ;} 
-       return;
-}
-
 
 GC7721  *gc7721;
 DataProc * dataProc;
@@ -75,33 +66,56 @@ void main(void)
 //初始化7721
   UartConfig GC7721Cfg = { uart1,Bps2400  };
   gc7721 =new GC7721(&GC7721Cfg); 
-  //设定7721收到消息后给到数据处理模块
-  gc7721->SetDataProcModule(dataProc);
+  //设定数据接收完成后的回调函数
+  gc7721->ReiceiveDoneCallback = DataProcGetString;
 
-  
   unsigned char keyGet;
   //用于显示当前电阻值的字符串
   unsigned char * ResNowDisplay;
   //用于显示原始电阻值的字符串
   unsigned char * ResInitDisplay;
+  //报警指示变量
+  unsigned char WarningFlag;
   while(1)
   {
     //检测按键值
     keyGet = key.KeyDetect();
     //将按键值输入到数据处理模块
     dataProc->GetKeyValue(keyGet);
-    //获取需要显示的当前阻值字符串
-    ResNowDisplay = dataProc->GetDisplayString();
+
     //获取需要显示的记录阻值字符串
     ResInitDisplay = dataProc->GetRecordDisplayString();
     display->ShowString(48,4,ResInitDisplay,12);
-    display->ShowString(0,48,ResNowDisplay,16);
+ 
+    //显示的当前阻值字符串  
+    ResNowDisplay = dataProc->GetDisplayString();  
+    display->ShowString(0,48, ResNowDisplay ,16);
+
+    //计算电阻值数值
+    dataProc->GetDecRes();
+
+    //计算是否需要报警
+    WarningFlag = dataProc->WarningFlag();
+    
+    //报警器动作
+    warnner.Warning(WarningFlag);
+
+    //显示阈值
+    display->ShowNUM(32,16,dataProc->GetThread1Value(),3,16);
+    display->ShowNUM(32,32,dataProc->GetThread2Value(),3,16);
+
+    //显示报警功能是否开启
+    display->ShowString(90,36,(unsigned char *)dataProc->GetWarningSW(),12);
+
     //刷新显存，将内容搬运到显示屏幕上
     display->RefreshScreen();
-    delay_ms(10);
-
   }
+}
 
+//GC7721接受完数据后的处理方法
+void DataProcGetString(unsigned char *rdata)
+{
+  dataProc->GetGC7721Frame(rdata);
 }
 
 

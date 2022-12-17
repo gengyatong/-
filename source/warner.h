@@ -22,7 +22,9 @@ class Warner
         void ClearWarning(unsigned char );
         //设置报警过程中的按键检测或其他回调函数，以提高报警过程中对其他输入的相应频率
         void SetCallBackFunc( void(*func)() );
- 
+        //实现报警功能
+        void Warning(unsigned char  );
+
     private :
         //报警状态开关，类内参数
         unsigned char warningSw_ ;
@@ -33,8 +35,7 @@ class Warner
         //声明led和蜂鸣器IO
         Gpio *Led;
         Gpio *Beeper;
-        //实现报警功能
-        void Warning(unsigned char  );
+
 };
 
 #endif

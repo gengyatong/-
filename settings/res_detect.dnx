@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <settings>
     <DebugChecksum>
-        <Checksum>3676785137</Checksum>
+        <Checksum>1949857931</Checksum>
     </DebugChecksum>
     <State_Storage>
         <Control_Register>-1</Control_Register>
@@ -62,6 +62,7 @@
     </Disassembly>
     <watch_formats>
         <Fmt0>{W}1:0x0032	4	0</Fmt0>
+        <Fmt1>{W}1:thresh_2	3	0</Fmt1>
     </watch_formats>
     <LogFile>
         <LoggingEnabled>_ 0</LoggingEnabled>

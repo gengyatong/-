@@ -21,12 +21,14 @@ private:
 public:
     GC7721(uartConfig * uartCfg);
     ~GC7721();
-    //用于调用接收完成后其他模块的处理方法,将缓冲器数组的指针返回给其他方法
-    void GC7721Str2Proc();
+    //数据接收完成后的回调函数指针
+    void (*ReiceiveDoneCallback)(unsigned char * );
     //从GC7721接收桢数据,存储到rdat缓冲区中
     void receive_frame_GC7721();
-    //设置需要指向的数据处理模块指针
-    void SetDataProcModule(DataProc*);
+    //关闭中断方法，在处理数据的时候需要关闭中断，以免数据出现前后段错乱
+    static void DisableInterupt();
+    //完成数据处理后打开中断
+    static void EnableInterupt();
 };
 
 

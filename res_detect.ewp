@@ -104,7 +104,7 @@
                 </option>
                 <option>
                     <name>GStackSize2</name>
-                    <state>200</state>
+                    <state>300</state>
                 </option>
                 <option>
                     <name>GHeapSize2</name>
@@ -433,7 +433,7 @@
                 </option>
                 <option>
                     <name>CCOptLevel</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CCOptStrategy</name>
@@ -442,7 +442,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CInput</name>

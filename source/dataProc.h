@@ -36,7 +36,8 @@ private:
     void RecordResDisplay();
     //记录初始电阻值
     void RecordResValue();
-
+    //一帧数据接收完成标志
+    unsigned char dataReady;
 public:
     //需要设置初始显示的电阻值字符串，以及初始电阻值
     DataProc(unsigned char * );
@@ -49,8 +50,16 @@ public:
     unsigned char * GetDisplayString();
     //返回需要显示的init栏显示的电阻数值字符串指针
     unsigned char * GetRecordDisplayString();
+    //返回高低两个阈值
+    unsigned char GetThread1Value();
+    unsigned char GetThread2Value();
+
+    //返回报警功能是否开关
+    const char * GetWarningSW();
+
     //将GC7721传来的数据计算成十进制
-    float GetDecRes(const unsigned char *num , const unsigned char *dp );
+   // float GetDecRes(const unsigned char *num , const unsigned char *dp );
+     float GetDecRes();
     //产生是否报警的标志
     //返回值bit[0]  1：需要LED报警：   返回值：0不需要LED报警
     //返回值bit[1]  1: 需要蜂鸣器报警； 返回值：0不需要蜂鸣器报警
